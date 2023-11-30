@@ -78,8 +78,9 @@ CommandAnalysis::CommandAnalysis(const Data::MemorySpecification& memSpec) :
   clearStats(0);
   zero = 0;
 
-  bank_state.resize(static_cast<size_t>(nBanks), BANK_PRECHARGED);
-  last_bank_state.resize(static_cast<size_t>(nBanks), BANK_PRECHARGED);
+  bank_state.SetSize(nBanks);
+  last_bank_state.SetSize(nBanks);
+  
   mem_state  = MS_NOT_IN_PD;
 
   cmd_list.clear();

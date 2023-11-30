@@ -1,5 +1,5 @@
 CC := g++
-CFLAGS := -g -I..
+CFLAGS := -g -I. -I..
 
 # Compile all C++ source files in the current directory
 SOURCES := $(wildcard *.cc)

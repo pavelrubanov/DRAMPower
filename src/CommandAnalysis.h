@@ -54,8 +54,10 @@
 #include "MemCommand.h"
 #include "MemorySpecification.h"
 #include "Utils.h"
+#include "BankStateVector.h"
 
 namespace Data {
+  
 class CommandAnalysis {
  public:
 
@@ -65,8 +67,6 @@ class CommandAnalysis {
     MS_PDN_S_PRE = 13, MS_SREF = 14
   };
   
-  clock_t AllTime = 0;
-
   // Returns number of reads, writes, acts, pres and refs in the trace
   CommandAnalysis(const MemorySpecification& memSpec);
   // Number of activate commands per bank
@@ -144,17 +144,19 @@ class CommandAnalysis {
                    int64_t timestamp = 0);
 
   std::vector<MemCommand> mergeSortedVectors(const std::vector<MemCommand>& vec1, const std::vector<MemCommand>& vec2);
+  
 
  private:
   MemorySpecification memSpec;
 
   // Possible bank states are precharged or active
-  enum BankState {
+  /*enum BankState {
     BANK_PRECHARGED = 0,
     BANK_ACTIVE
-  };
+  };*/
 
   int64_t  zero;
+  
   // Cached last read command from the file
   std::vector<MemCommand> cached_cmd;
 
@@ -166,10 +168,12 @@ class CommandAnalysis {
 
   // To save states of the different banks, before entering active
   // power-down mode (slow/fast-exit).
-  std::vector<BankState> last_bank_state;
+  //std::vector<BankState> last_bank_state;
+  BankStateVector last_bank_state;
   // Bank state vector
-  std::vector<BankState> bank_state;
-
+  //std::vector<BankState> bank_state;
+  BankStateVector bank_state;
+  
   std::vector<int64_t> activation_cycle;
   // To keep track of the last ACT cycle
   int64_t latest_act_cycle;
