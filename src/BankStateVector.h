@@ -8,15 +8,15 @@ using namespace std;
 
 namespace Data{
 
-enum BankState {
-            BANK_PRECHARGED = 0,
-            BANK_ACTIVE
-        };
+enum BankState 
+{
+    BANK_PRECHARGED = 0,
+    BANK_ACTIVE
+};
 
 class BankStateVector
 {
     public:
-        
         BankStateVector();
         void SetSize(int64_t);
         void clear();
@@ -28,6 +28,6 @@ class BankStateVector
 
     private:
         std::vector<BankState> bank_state;
-        unsigned num_active_banks;
+        unsigned _num_active_banks;
 };
 }
